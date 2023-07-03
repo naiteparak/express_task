@@ -14,7 +14,6 @@ class UserController implements IUsersController {
     const newUser = await usersService.createUser(userData);
     return res.status(STATUS_CODES.CREATED).send({ response: newUser });
   }
-  //TODO add try catch
 }
 
 export const usersController = new UserController();

@@ -4,6 +4,6 @@ export interface IUser {
   age: number;
   gender: string;
   status: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

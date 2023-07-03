@@ -7,6 +7,6 @@ export const usersRouter = Router();
 usersRouter
   .get('/users', usersController.getUsers)
   .post('/users', checkBodyMiddleware, usersController.createUser)
-  .patch('/users/:id')
-  .patch('/users/status/:id')
-  .delete('/users/:id');
+  .patch('/users')
+  .patch('/users/status')
+  .delete('/users');
