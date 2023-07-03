@@ -1,7 +1,6 @@
 export enum ERROR_MESSAGES {
   ENDPOINT_NOT_FOUND = 'Endpoint not found',
   UNAUTHORIZED = 'Unauthorized',
-  DIRECTORY_FIELD_REQUIRED = 'Directory field required',
+  BAD_REQUEST = 'Bad request',
   INTERNAL_SERVER_ERROR = 'Internal server error',
-  FILE_DOES_NOT_EXISTS = 'The specified file does not exist',
 }

@@ -18,6 +18,7 @@ class UsersService implements IUsersService {
       // @ts-ignore
       id: randomUUID(),
       ...user,
+      status: false,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
