@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { STATUS_CODES } from '../responses/status-codes';
 import { ERROR_MESSAGES } from '../responses/messages';
 
-export const checkBodyMiddleware = function (
+export const createUserMiddleware = function (
   req: Request,
   res: Response,
   next: NextFunction,

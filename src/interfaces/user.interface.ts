@@ -7,3 +7,9 @@ export interface IUser {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface createUserDto {
+  name: string;
+  age: number;
+  gender: string;
+}

@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { randomUUID } from 'crypto';
-import { IUser } from '../interfaces/user.interface';
+import { createUserDto, IUser } from '../interfaces/user.interface';
 import { IUsersService } from '../interfaces/users.service.interface';
 import users from '../db/users.json';
 
@@ -13,16 +13,21 @@ class UsersService implements IUsersService {
 
   getUserById(id: string): IUser | undefined {
     const users = this.getUsers();
-    return users.find((user) => user.id === id);
+    return users.find((user: IUser) => user.id === id);
   }
 
-  async createUser(user: IUser): Promise<IUser> {
+  getUserIndexById(id: string): number {
+    const users = this.getUsers();
+    return users.findIndex((user) => user.id === id);
+  }
+
+  async createUser(userData: createUserDto): Promise<IUser> {
     const users = this.getUsers();
 
     const newUser: IUser = {
       // @ts-ignore
       id: randomUUID(),
-      ...user,
+      ...userData,
       status: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -32,6 +37,44 @@ class UsersService implements IUsersService {
     await writeFile(this.usersFilePath, JSON.stringify(users));
     return newUser;
   }
+
+  async updateUser(
+    id: string,
+    userData: Partial<createUserDto>,
+  ): Promise<IUser> {
+    const users = this.getUsers();
+    const userIndex = this.getUserIndexById(id);
+    const user = users[userIndex];
+
+    const updatedUser = {
+      ...user,
+      ...userData,
+      updatedAt: new Date().toISOString(),
+    };
+
+    users[userIndex] = updatedUser;
+    await writeFile(this.usersFilePath, JSON.stringify(users));
+
+    return updatedUser;
+  }
+
+  async updateUserStatus(id: string): Promise<IUser> {
+    const users = this.getUsers();
+    const userIndex = this.getUserIndexById(id);
+    const user = users[userIndex];
+
+    const updatedUser = {
+      ...user,
+      status: true,
+      updatedAt: new Date().toISOString(),
+    };
+
+    users[userIndex] = updatedUser;
+    await writeFile(this.usersFilePath, JSON.stringify(users));
+    return updatedUser;
+  }
+
+  deleteUser(id: string): void {}
 }
 
 export const usersService = new UsersService();
