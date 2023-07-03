@@ -38,21 +38,3 @@ export const updateUserMiddleware = function (
 
   next();
 };
-
-export const updateUserStatusMiddleware = function (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void {
-  if (
-    typeof req.query.id !== 'string' ||
-    !usersService.getUserById(req.query.id)
-  ) {
-    res
-      .status(STATUS_CODES.BAD_REQUEST)
-      .send({ response: ERROR_MESSAGES.USER_ID_ERROR });
-    return;
-  }
-
-  next();
-};

@@ -6,6 +6,6 @@ export interface IUsersService {
   getUserIndexById(id: string): number;
   createUser(userData: Partial<createUserDto>): Promise<IUser>;
   updateUser(id: string, userData: createUserDto): Promise<IUser>;
-  updateUserStatus(id: string): void;
-  deleteUser(id: string): void;
+  updateUserStatus(id: string): Promise<IUser>;
+  deleteUser(id: string): Promise<void>;
 }

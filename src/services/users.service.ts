@@ -74,7 +74,13 @@ class UsersService implements IUsersService {
     return updatedUser;
   }
 
-  deleteUser(id: string): void {}
+  async deleteUser(id: string): Promise<void> {
+    const users = this.getUsers();
+    const userIndex = this.getUserIndexById(id);
+    users.splice(userIndex, 1);
+    await writeFile(this.usersFilePath, JSON.stringify(users));
+    return;
+  }
 }
 
 export const usersService = new UsersService();

@@ -32,7 +32,8 @@ class UserController implements IUsersController {
   }
 
   async deleteUser(req: Request, res: Response): Promise<Response> {
-    return res.status(STATUS_CODES.NO_CONTENT);
+    await usersService.deleteUser(req.query.id as string);
+    return res.status(STATUS_CODES.NO_CONTENT).send();
   }
 }
 
