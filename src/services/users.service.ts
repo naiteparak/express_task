@@ -25,7 +25,6 @@ class UsersService implements IUsersService {
     const users = this.getUsers();
 
     const newUser: IUser = {
-      // @ts-ignore
       id: randomUUID(),
       ...userData,
       status: false,
